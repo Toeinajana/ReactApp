@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
 const Customers = props => (
 
@@ -10,6 +12,10 @@ const Customers = props => (
         <td>{props.customers.email}</td>
         <td>
             <Link to={"/update/"+props.customers._id}>Update</Link>
+        </td>
+
+        <td>
+            <Link to={"/delete/"+props.customers._id}><FontAwesomeIcon icon={faTrashAlt} /></Link>
         </td>
     </tr>
 )
@@ -23,6 +29,19 @@ export default class Mainpage extends Component {
     }
 
     componentDidMount() {
+        axios.get('http://localhost:8000/customers/')
+        .then(response => {
+            this.setState({customers: response.data});
+        })
+        .catch(function(error){
+
+            console.log(error);
+        })
+    }
+
+    //immediately update
+    componentDidUpdate(){
+
         axios.get('http://localhost:8000/customers/')
         .then(response => {
             this.setState({customers: response.data});

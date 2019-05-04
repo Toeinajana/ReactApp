@@ -3,10 +3,15 @@ import { BrowserRouter, Route, Link } from "react-router-dom";
 
 import {Button} from 'reactstrap';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStroopwafel } from '@fortawesome/free-solid-svg-icons'
 
 import MainPage from "./components/mainpage.component";
 import Create from "./components/create.component";
 import Update from "./components/update.component";
+
+library.add(faStroopwafel)
 
 class App extends Component {
 
