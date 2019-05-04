@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 
 export default class Create extends Component {
 
@@ -43,6 +44,19 @@ export default class Create extends Component {
         console.log(`Name: ${this.state.firstn}`);
         console.log(`Last name: ${this.state.lastn}`);
         console.log(`Email: ${this.state.email}`);
+
+        const newCustomers = {
+
+            firstn: this.state.firstn,
+            lastn: this.state.lastn,
+            email: this.state.email
+
+        }
+
+        //connect with backend
+        axios.post('http://localhost:8000/customers/create', newCustomers)
+
+             .then(res => console.log(res.data));
 
         this.setState({
 
