@@ -1,6 +1,48 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+const Customers = props => (
+
+    <tr>
+        <td>{props.customers.firstn}</td>
+        <td>{props.customers.lastn}</td>
+        <td>{props.customers.email}</td>
+        <td>
+            <Link to={"/update/"+props.customers._id}>Update</Link>
+        </td>
+    </tr>
+)
 
 export default class Mainpage extends Component {
+
+    constructor(props){
+
+        super(props);
+        this.state = {customers: []};
+    }
+
+    componentDidMount() {
+        axios.get('http://localhost:8000/customers/')
+        .then(response => {
+            this.setState({customers: response.data});
+        })
+        .catch(function(error){
+
+            console.log(error);
+        })
+    }
+
+    listOfcustomers(){
+
+        return this.state.customers.map(function(currentCustomer, i){
+
+
+            return <Customers customers={currentCustomer} key={i} />;
+
+
+        });
+    }
 
     render(){
 
@@ -8,7 +50,21 @@ export default class Mainpage extends Component {
 
             <div>
 
-                <p>Welcome to database system</p>
+              <h3>customers details</h3>
+              <table className="table table-striped" style={{marginTop: 20}}>
+              <thead>
+                  <tr>
+                      <th>First name</th>
+                      <th>Last name</th>
+                      <th>Email</th>
+                      
+                  </tr>
+              </thead>
+              <tbody>
+                  {this.listOfcustomers()}
+              </tbody>
+              
+              </table>
 
             </div>
 
