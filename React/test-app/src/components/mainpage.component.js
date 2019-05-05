@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import {Button} from 'reactstrap';
 
 const Customers = props => (
 
@@ -15,7 +16,8 @@ const Customers = props => (
         </td>
 
         <td>
-            <Link to={"/delete/"+props.customers._id}><FontAwesomeIcon icon={faTrashAlt} /></Link>
+           
+            <Link to={"/delete/"+props.customers._id}><FontAwesomeIcon icon={faTrashAlt} color="red" /></Link>
         </td>
     </tr>
 )

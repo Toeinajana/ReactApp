@@ -38,17 +38,21 @@ customersRoutes.route('/:id').get(function(req, res){
     });
 });
 
-customersRoutes.route('/delete/:id').post(function(req, res){
+customersRoutes.route('/delete/:id').get(function(req, res){
 
-    Customers.findByIdAndRemove(req.params.id, function(err, customers){
+    let id = req.params.id;
+ 
 
+    Customers.findByIdAndDelete(id, function(err, customers){
+
+        
         if(!customers)
            res.status(404).send('cannot delete');
 
         else{
 
 
-            res.redirect('/customers');
+            res.json(customers);
 
         }
    
