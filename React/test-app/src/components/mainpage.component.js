@@ -2,25 +2,28 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit } from '@fortawesome/free-solid-svg-icons'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
-import {Button} from 'reactstrap';
+
 
 const Customers = props => (
+
 
     <tr>
         <td>{props.customers.firstn}</td>
         <td>{props.customers.lastn}</td>
         <td>{props.customers.email}</td>
         <td>
-            <Link to={"/update/"+props.customers._id}>Update</Link>
+        <Link to={"/update/"+props.customers._id}><FontAwesomeIcon icon={faEdit} color="#4286f4" /></Link>
         </td>
 
         <td>
-           
-            <Link to={"/delete/"+props.customers._id}><FontAwesomeIcon icon={faTrashAlt} color="red" /></Link>
+        <Link to={"/delete/"+props.customers._id}><FontAwesomeIcon icon={faTrashAlt} color="#a51810" /></Link>
+        
         </td>
     </tr>
 )
+
 
 export default class Mainpage extends Component {
 
@@ -28,6 +31,7 @@ export default class Mainpage extends Component {
 
         super(props);
         this.state = {customers: []};
+        
     }
 
     componentDidMount() {
@@ -71,13 +75,15 @@ export default class Mainpage extends Component {
 
             <div>
 
-              <h3>customers details</h3>
+              <h3>▶ Customers details</h3>
               <table className="table table-striped" style={{marginTop: 20}}>
-              <thead>
+              <thead className="thead-dark">
                   <tr>
                       <th>First name</th>
                       <th>Last name</th>
                       <th>Email</th>
+                      <th></th>
+                      <th></th>
                       
                   </tr>
               </thead>

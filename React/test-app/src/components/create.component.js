@@ -19,6 +19,21 @@ export default class Create extends Component {
       }
     }
 
+    componentDidMount(){
+        axios.get('http://localhost:8000/customers/'+this.props.match.params.id)
+             .then(response => {
+                 this.setState({
+                     firstn: response.data.firstn,
+                     lastn: response.data.lastn,
+                     email: response.data.email
+                 })
+             })
+             .catch(function(error){
+                 console.log(error)
+             })
+    }
+    
+
     onChangeFirstn(e){
         this.setState({
             firstn: e.target.value
@@ -64,6 +79,8 @@ export default class Create extends Component {
             lastn: '',
             email: ''
         })
+//reload page
+        this.props.history.push('/');
     }
 
     render(){
@@ -71,7 +88,7 @@ export default class Create extends Component {
         return(
         
             <div style={{marginTop: 20}}>
-             <h4>Create new customer</h4>
+             <h3>▶ Create new customer</h3>
                 <form onSubmit={this.onSubmit}>
 
                 <div className="form-group">

@@ -75,7 +75,7 @@ export default class Update extends Component {
 
             <div>
 
-                <h3>Update details</h3>
+                <h3>▶ Update details</h3>
                 <form onSubmit={this.onSubmit}>
                     
                     <div className="form-group">

@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const customersRoutes = express.Router();
+const customersRoutes = express.Router(); //access to express
 const PORT = 8000;
 
 let Customers = require('./customers.model');
@@ -11,12 +11,14 @@ let Customers = require('./customers.model');
 app.use(cors());
 app.use(bodyParser.json());
 
+//connect mongodb
 mongoose.connect('mongodb://127.0.0.1:27017/customers', {useNewUrlParser:true});
 const connection = mongoose.connection;
 connection.once('open', function(){
     console.log("Mongo connection is successful")
 })
 
+//retriving
 customersRoutes.route('/').get(function(req, res){
 
     Customers.find(function(err, customers){
@@ -25,11 +27,11 @@ customersRoutes.route('/').get(function(req, res){
             console.log(err);
         }
         else{
-            res.json(customers);
+            res.json(customers); // from database
         }
     });
 });
-
+//retrive one specific id
 customersRoutes.route('/:id').get(function(req, res){
     let id = req.params.id;
     Customers.findById(id, function(err, customers){
@@ -42,15 +44,13 @@ customersRoutes.route('/delete/:id').get(function(req, res){
 
     let id = req.params.id;
  
-
-    Customers.findByIdAndDelete(id, function(err, customers){
+    Customers.findByIdAndRemove(id, function(err, customers){
 
         
-        if(!customers)
+        if(err)
            res.status(404).send('cannot delete');
 
         else{
-
 
             res.json(customers);
 
@@ -69,6 +69,8 @@ customersRoutes.route('/create').post(function(req, res){
         .then(customers => {
 
             res.status(200).json({'customers': 'customer added successfully'});
+
+            res.json(customers);
         
         })
         .catch(err=>{
@@ -84,7 +86,7 @@ customersRoutes.route('/update/:id').post(function(req, res){
         if(!customers)
            res.status(404).send('data not found');
 
-        else
+        else //access propreties
            customers.firstn = req.body.firstn;
            customers.lastn = req.body.lastn;
            customers.email = req.body.email;
@@ -101,6 +103,7 @@ customersRoutes.route('/update/:id').post(function(req, res){
 
 app.use('/customers', customersRoutes);
 
+//call back
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT);
 });

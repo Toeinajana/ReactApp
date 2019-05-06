@@ -1,16 +1,17 @@
 import React, {Component} from 'react';
 import { BrowserRouter, Route, Link } from "react-router-dom";
-
-import {Button} from 'reactstrap';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStroopwafel } from '@fortawesome/free-solid-svg-icons'
 
+//import component
 import MainPage from "./components/mainpage.component";
 import Create from "./components/create.component";
 import Update from "./components/update.component";
+import Delete from "./components/delete.component";
 
+
+//for fontawesome
 library.add(faStroopwafel)
 
 class App extends Component {
@@ -35,14 +36,14 @@ class App extends Component {
 
       <BrowserRouter>
 
-      <div className="Container">
+      <div className="Container" style={{marginTop: 20}}>
 
       <center><h2>Database system</h2></center>
 
       <div>
 
       <Navbar color="faded" light>
-          <NavbarBrand className="mr-auto">Main page</NavbarBrand>
+          <NavbarBrand className="mr-auto mb-0 h1">Main page</NavbarBrand>
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar>
@@ -59,9 +60,14 @@ class App extends Component {
 
       </div>
 
+      {/* component */}
+
         <Route path="/" exact component={MainPage}/>
         <Route path="/update/:id" component={Update}/>
         <Route path="/create" component={Create}/>
+        <Route path="/delete" component={Delete}/>
+        
+
 
       </div>
       
