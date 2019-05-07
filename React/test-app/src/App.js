@@ -25,6 +25,7 @@ class App extends Component {
     };
   }
 
+  //navbar
   toggleNavbar() {
     this.setState({
       collapsed: !this.state.collapsed

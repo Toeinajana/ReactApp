@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 
-
+//records in table form
 const Customers = props => (
 
 
@@ -58,6 +58,7 @@ export default class Mainpage extends Component {
         })
     }
 
+    //display records
     listOfcustomers(){
 
         return this.state.customers.map(function(currentCustomer, i){

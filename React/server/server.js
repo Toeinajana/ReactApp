@@ -18,7 +18,7 @@ connection.once('open', function(){
     console.log("Mongo connection is successful")
 })
 
-//retriving
+//get all customers
 customersRoutes.route('/').get(function(req, res){
 
     Customers.find(function(err, customers){
@@ -31,7 +31,7 @@ customersRoutes.route('/').get(function(req, res){
         }
     });
 });
-//retrive one specific id
+//get one one customers by specific id
 customersRoutes.route('/:id').get(function(req, res){
     let id = req.params.id;
     Customers.findById(id, function(err, customers){
@@ -40,6 +40,7 @@ customersRoutes.route('/:id').get(function(req, res){
     });
 });
 
+//delete
 customersRoutes.route('/delete/:id').get(function(req, res){
 
     let id = req.params.id;
@@ -58,10 +59,9 @@ customersRoutes.route('/delete/:id').get(function(req, res){
    
     });
 
-
 });
 
-
+//create
 customersRoutes.route('/create').post(function(req, res){
 
     let customers = new Customers(req.body);
@@ -79,6 +79,7 @@ customersRoutes.route('/create').post(function(req, res){
         });
 });
 
+//update
 customersRoutes.route('/update/:id').post(function(req, res){
 
     Customers.findById(req.params.id, function(err, customers){
