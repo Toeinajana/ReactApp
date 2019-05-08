@@ -14,7 +14,7 @@ brew install mongodb
 cd server
 ```
 
-2.1 Install Express, body-parser, cors and mongoose in backend file
+#### 2.1 Install Express, body-parser, cors and mongoose in backend file
 ```
 npm install express body-parser cors mongoose
 ```
@@ -34,7 +34,7 @@ Mongo
 use customers
 ```
 
-2.2 Install Nodemon
+#### 2.2 Install Nodemon
 ```
 npm install -g nodemon
 ```
